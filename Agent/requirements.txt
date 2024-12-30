@@ -1,0 +1,14 @@
+langchain
+langchain-community
+mysql
+openai==0.28
+pypdf 
+tiktoken
+lark
+sentence-transformers
+pymysql
+chardet
+mysql-connector-python
+pandas
+faiss-cpu
+gradio
