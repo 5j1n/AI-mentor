@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>전북대 AI 멘토</title>
+    <link rel="stylesheet" href="static/style55.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head>
+  <body>
+    <div id="course-info" style="display: none;">
+      <h2 id="course-name"></h2>
+      <p id="course-department"></p>
+      <p id="course-goal"></p>
+    </div>
+    <!-- Example prompts -->
+    <div class="example-prompts">
+      <p style="text-align: right;">예시 질문:</p>
+      <button onclick="insertPrompt('오늘 저녁뭐먹을까?')">오늘 저녁뭐먹을까?</button>
+      <button onclick="insertPrompt('통계학과의 커리큘럼을 알려주세요.')">통계학과의 커리큘럼을 알려주세요.</button>
+      <button onclick="insertPrompt('선형대수학은 어떤 교수님들이 가르치시나요?')">선형대수학은 어떤 교수님들이 가르치시나요?</button>
+      <button onclick="insertPrompt('AI를 활용한 배터리 전문가가 되려면 어떤 과목을 들어야 해?')">AI를 활용한 배터리 전문가가 되려면 어떤 과목을 들어야 해?</button>
+    </div>
+    
+    <!-- Toggle button -->
+    <button id="toggle-prompts-btn">X</button>
+    <button id="curriculum-prompts-btn" style="display: none;">X</button>
+    <button id="explain-prompts-btn" style="display: none;">X</button>
+    
+    <!-- 커리큘럼 표 -->
+    <table id="curriculum-table" class="curriculum-table">
+      <thead>
+        <tr>
+          <th>학년/학기</th>
+          <th>추천 강의</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>4학년 2학기</td>
+          <td>
+            <button id="btn1"></button>
+            <button id="btn2"></button>
+            <button id="btn3"></button>
+            <button id="btn4"></button>
+            <button id="btn5"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>4학년 1학기</td>
+          <td>
+            <button id="btn6"></button>
+            <button id="btn7"></button>
+            <button id="btn8"></button>
+            <button id="btn9"></button>
+            <button id="btn10"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>3학년 2학기</td>
+          <td>
+            <button id="btn11"></button>
+            <button id="btn12"></button>
+            <button id="btn13"></button>
+            <button id="btn14"></button>
+            <button id="btn15"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>3학년 1학기</td>
+          <td>
+            <button id="btn16"></button>
+            <button id="btn17"></button>
+            <button id="btn18"></button>
+            <button id="btn19"></button>
+            <button id="btn20"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>2학년 2학기</td>
+          <td>
+            <button id="btn21"></button>
+            <button id="btn22"></button>
+            <button id="btn23"></button>
+            <button id="btn24"></button>
+            <button id="btn25"></button>
+          </td>
+        </tr>
+        <tr>
+          <td>2학년 1학기</td>
+          <td>
+            <button id="btn26"></button>
+            <button id="btn27"></button>
+            <button id="btn28"></button>
+            <button id="btn29"></button>
+            <button id="btn30"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Chats container -->
+    <div class="chat-container"></div>
+    
+    <!-- Typing container -->
+    <div class="typing-container">
+      <div class="typing-content">
+        <div class="typing-textarea">
+          <textarea id="chat-input" spellcheck="false" placeholder="프롬프트를 입력하세요." required></textarea>
+          <span id="send-btn" class="material-symbols-rounded">send</span>
+        </div>
+        <div class="typing-controls">
+          <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
+          <span id="delete-btn" class="material-symbols-rounded">delete</span>
+        </div>
+      </div>
+    </div>
+    
+    <script src="static/script86.js"></script>
+    <script>
+      // JavaScript function to insert prompt into chat input
+      function insertPrompt(text) {
+        document.getElementById('chat-input').value = text;
+      }
+
+      // Toggle button functionality
+      const toggleButton = document.getElementById('toggle-prompts-btn');
+      const curriculumButton = document.getElementById('curriculum-prompts-btn');
+      const explainButton = document.getElementById('explain-prompts-btn');
+      const promptsDiv = document.querySelector('.example-prompts');
+      const curriculumDiv = document.querySelector('#curriculum-table');
+      const explainDiv = document.querySelector('#course-info');
+
+      toggleButton.addEventListener('click', () => {
+        if (promptsDiv.style.display === 'none' || promptsDiv.style.display === '') {
+          promptsDiv.style.display = 'block';
+          toggleButton.textContent = 'X';
+        } else {
+          promptsDiv.style.display = 'none';
+          toggleButton.textContent = 'O';
+        }
+      });
+      curriculumButton.addEventListener('click', () => {
+        if (curriculumDiv.style.display === 'none' || curriculumDiv.style.display === '') {
+          curriculumDiv.style.display = 'table';
+          curriculumButton.textContent = 'X';
+        } else {
+          curriculumDiv.style.display = 'none';
+          curriculumButton.textContent = 'O';
+        }
+      });
+      explainButton.addEventListener('click', () => {
+        explainDiv.style.display = 'none';
+        explainButton.style.display = 'none';
+      });
+    </script>
+  </body>
+</html>

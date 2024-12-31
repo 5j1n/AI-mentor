@@ -1,0 +1,428 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+:root {
+  --text-color: #FFFFFF;
+  --icon-color: #ACACBE;
+  --icon-hover-bg: #5b5e71;
+  --placeholder-color: #dcdcdc;
+  --outgoing-chat-bg: #343541;
+  --incoming-chat-bg: #444654;
+  --outgoing-chat-border: #343541;
+  --incoming-chat-border: #444654;
+}
+.light-mode {
+  --text-color: #343541;
+  --icon-color: #a9a9bc;
+  --icon-hover-bg: #f1f1f3;
+  --placeholder-color: #6c6c6c;
+  --outgoing-chat-bg: #FFFFFF;
+  --incoming-chat-bg: #F7F7F8;
+  --outgoing-chat-border: #FFFFFF;
+  --incoming-chat-border: #D9D9E3;
+}
+body {
+  background: var(--outgoing-chat-bg);
+}
+.example-prompts {
+  position: fixed;
+  bottom: 120px;
+  left: 10px;
+  background-color: #6c6c6c;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #FFFFFF;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.example-prompts button {
+  cursor: pointer;
+  padding: 8px 20px;
+  background-color: #333;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 8px; /* 버튼 아래 간격 */
+  font-size: 10px;
+  font-weight: bold;
+  display: block; /* 버튼을 블록 요소로 설정하여 세로로 나열 */
+  width: 100%; /* 필요 시 버튼 너비를 전체로 설정 */
+  transition: background-color 0.3s;
+}
+
+.example-prompts p {
+  font-weight: bold; /* '예시 질문:' 텍스트를 굵게 설정 */
+  margin-bottom: 8px; /* '예시 질문:'과 버튼들 사이 간격 */
+  color: #ffffff; /* '예시 질문:' 텍스트 색상 */
+}
+
+.example-prompts button:hover {
+  background-color: #555;      /* 호버 시 배경색 */
+  color: #e0e0e0;              /* 호버 시 글자색 */
+}
+/* Toggle button 스타일 */
+#toggle-prompts-btn {
+  display: block;
+  position: fixed;
+  bottom: 300px;
+  left: 30px;
+  padding: 10px 15px;
+  font-size: 12px;
+  background-color: #343541; /* 파란색 배경 */
+  color: white; /* 버튼 텍스트 색상 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease; /* 배경색 변경 애니메이션 */
+}
+
+#curriculum-prompts-btn {
+  position: fixed;
+  bottom: 110px;
+  right: 40px;
+  padding: 10px 15px;
+  font-size: 12px;
+  background-color: #343541; /* 파란색 배경 */
+  color: white; /* 버튼 텍스트 색상 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease; /* 배경색 변경 애니메이션 */
+  z-index: 9999; /* 제일 위로 올리기 */
+}
+
+#explain-prompts-btn {
+  position: fixed;
+  top: 50px; /* 화면 상단에서 10px 만큼 떨어진 위치 */
+  right: 20px;
+  padding: 10px 15px;
+  font-size: 12px;
+  background-color: #343541; /* 파란색 배경 */
+  color: white; /* 버튼 텍스트 색상 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease; /* 배경색 변경 애니메이션 */
+  z-index: 9999; /* 제일 위로 올리기 */
+}
+
+#curriculum-prompts-btn:hover {
+  background-color: #0056b3; /* hover 시 어두운 파란색으로 변경 */
+}
+
+#toggle-prompts-btn:hover {
+  background-color: #0056b3; /* hover 시 어두운 파란색으로 변경 */
+}
+
+
+#course-info {
+  width: 500px; /* 너비 자동으로 늘어나도록 */
+  height: auto; /* 높이 고정 */
+  position: fixed; /* 화면에서 고정된 위치에 배치 */
+  top: 50px; /* 화면 상단에서 10px 만큼 떨어진 위치 */
+  right: 20px; /* 화면 오른쪽에서 10px 만큼 떨어진 위치 */
+  background-color: white; /* 배경색 흰색 */
+  color: black; /* 글씨색 검정색 */
+  padding: 20px; /* 안쪽 여백 */
+  border-radius: 8px; /* 둥근 모서리 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  z-index: 9999; /* 다른 요소들보다 위에 표시되도록 */
+}
+
+#course-info h2 {
+  font-size: 20px; /* 교과목명 크기 */
+  font-weight: bold; /* 교과목명 굵게 */
+}
+
+#course-info p {
+  font-size: 14px; /* 수업목표와 학과 텍스트 크기 */
+  margin: 5px 0; /* 위 아래 여백 */
+}
+/* 표 스타일 */
+
+#curriculum-table {
+  display: none; /* 기본적으로 숨김 상태 */
+}
+
+.curriculum-table {
+  width: auto; /* 너비 자동으로 늘어나도록 */
+  height: 300px; /* 높이 고정 */
+  border-collapse: collapse;
+  margin: 20px;
+  position: fixed;
+  bottom: 120px; /* 화면 하단에 고정 */
+  right: 20px;  /* 화면 오른쪽에 고정 */
+  z-index: 1000; /* 다른 요소보다 위에 배치 */
+  background-color: white; /* 배경색 추가 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  border-radius: 10px; /* 모서리 둥글게 */
+}
+
+.curriculum-table th, .curriculum-table td {
+  border: 1px solid #ddd;
+  padding: 8px; /* 셀 안쪽 여백을 줄임 */
+  text-align: center;
+  font-size: 14px; /* 글자 크기 축소 */
+}
+
+.curriculum-table th {
+  background-color: #f4f4f4;
+  font-size: 16px; /* 제목 글자 크기 키움 */
+}
+
+.curriculum-table td button {
+  margin: 5px;
+  padding: 3px; /* 버튼 크기 줄임 */
+  font-size: 10px; /* 버튼 글자 크기 줄임 */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.curriculum-table td button:hover {
+  background-color: #0056b3;
+}
+/* Chats container styling */
+.chat-container {
+  overflow-y: auto;
+  max-height: 100vh;
+  padding-bottom: 150px;
+}
+:where(.chat-container, textarea)::-webkit-scrollbar {
+  width: 6px;
+}
+:where(.chat-container, textarea)::-webkit-scrollbar-track {
+  background: var(--incoming-chat-bg);
+  border-radius: 25px;
+}
+:where(.chat-container, textarea)::-webkit-scrollbar-thumb {
+  background: var(--icon-color);
+  border-radius: 25px;
+}
+.default-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 70vh;
+  padding: 0 10px;
+  text-align: center;
+  color: var(--text-color);
+}
+.default-text h1 {
+  font-size: 3.3rem;
+}
+.default-text p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
+.chat-container .chat {
+  padding: 25px 10px;
+  display: flex;
+  justify-content: center;
+  color: var(--text-color);
+}
+.chat-container .chat.outgoing {
+  background: var(--outgoing-chat-bg);
+  border: 1px solid var(--outgoing-chat-border);
+}
+.chat-container .chat.incoming {
+  background: var(--incoming-chat-bg);
+  border: 1px solid var(--incoming-chat-border);
+}
+.chat .chat-content {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+span.material-symbols-rounded {
+  user-select: none;
+  cursor: pointer;
+}
+.chat .chat-content span {
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: var(--icon-color);
+  visibility: hidden;
+}
+.chat:hover .chat-content:not(:has(.typing-animation), :has(.error)) span {
+  visibility: visible;
+}
+.chat .chat-details {
+  display: flex;
+  align-items: center;
+}
+.chat .chat-details img {
+  width: 35px;
+  height: 35px;
+  align-self: flex-start;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.chat .chat-details p {
+  white-space: pre-wrap;
+  font-size: 1.05rem;
+  padding: 0 50px 0 25px;
+  color: var(--text-color);
+  word-break: break-word;
+}
+.chat .chat-details p.error {
+  color: #ffffff;
+}
+.chat .typing-animation {
+  padding-left: 25px;
+  display: inline-flex;
+}
+.typing-animation .typing-dot {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  margin: 0 3px;
+  opacity: 0.7;
+  background: var(--text-color);
+  animation: animateDots 1.5s var(--delay) ease-in-out infinite;
+}
+.typing-animation .typing-dot:first-child {
+  margin-left: 0;
+}
+@keyframes animateDots {
+  0%,44% {
+    transform: translateY(0px);
+  }
+  28% {
+    opacity: 0.4;
+    transform: translateY(-6px);
+  }
+  44% {
+    opacity: 0.2;
+  }
+}
+
+/* Typing container styling */
+.typing-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 20px 10px;
+  justify-content: center;
+  background: var(--outgoing-chat-bg);
+  border-top: 1px solid var(--incoming-chat-border);
+}
+.typing-container .typing-content {
+  display: flex;
+  max-width: 950px;
+  width: 100%;
+  align-items: flex-end;
+}
+.typing-container .typing-textarea {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.typing-textarea textarea {
+  resize: none;
+  height: 55px;
+  width: 100%;
+  border: none;
+  padding: 15px 45px 15px 20px;
+  color: var(--text-color);
+  font-size: 1rem;
+  border-radius: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  background: var(--incoming-chat-bg);
+  outline: 1px solid var(--incoming-chat-border);
+}
+.typing-textarea textarea::placeholder {
+  color: var(--placeholder-color);
+}
+.typing-content span {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  border-radius: 4px;
+  font-size: 1.35rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--icon-color);
+}
+.typing-textarea span {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+}
+.typing-textarea textarea:valid ~ span {
+  visibility: visible;
+}
+.typing-controls {
+  display: flex;
+}
+.typing-controls span {
+  margin-left: 7px;
+  font-size: 1.4rem;
+  background: var(--incoming-chat-bg);
+  outline: 1px solid var(--incoming-chat-border);
+}
+.typing-controls span:hover {
+  background: var(--icon-hover-bg);
+}
+
+.typing-controls .example-prompt:hover {
+  background-color: #555;  /* 호버 시 배경색 */
+  color: #e0e0e0;          /* 호버 시 글자색 */
+}
+
+
+/* Reponsive Media Query */
+@media screen and (max-width: 600px) {
+  .default-text h1 {
+    font-size: 2.3rem;
+  }
+  :where(.default-text p, textarea, .chat p) {
+    font-size: 0.95rem!important;
+  }
+  .chat-container .chat {
+    padding: 20px 10px;
+  }
+  .chat-container .chat img {
+    height: 32px;
+    width: 32px;
+  }
+  .chat-container .chat p {
+    padding: 0 20px;
+  }
+  .chat .chat-content:not(:has(.typing-animation), :has(.error)) span {
+    visibility: visible;
+  }
+  .typing-container {
+    padding: 15px 10px;
+  }
+  .typing-textarea textarea {
+    height: 45px;
+    padding: 10px 40px 10px 10px;
+  }
+  .typing-content span {
+    height: 45px;
+    width: 45px;
+    margin-left: 5px;
+  }
+  span.material-symbols-rounded {
+    font-size: 1.25rem!important;
+  }
+}
